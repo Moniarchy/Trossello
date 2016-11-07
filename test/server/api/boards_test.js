@@ -154,13 +154,15 @@ describe('/api/boards', () => {
         describe('POST /api/boards/:boardId', () => {
           it('should update the board', () => {
             const boardAttributes = {
-              name: 'fresh board'
+              name: 'fresh board',
+              starred: true
             }
             return request('post', '/api/boards/102', boardAttributes).then(response => {
               expect(response).to.have.status(200)
               expect(response.body.id).to.eql(102)
               expect(response.body.name).to.eql('fresh board')
               expect(response.body.background_color).to.eql('purple')
+              expect(response.body.starred).to.eql(true)
             })
           })
         })
