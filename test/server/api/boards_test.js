@@ -207,7 +207,7 @@ describe('/api/boards', () => {
         })
 
         // Unstar Board
-        describe.only('POST /api/boards/<existing board id>/unstar', () => {
+        describe('POST /api/boards/<existing board id>/unstar', () => {
           it('should set starred to false and return 200', () => {
             return request('post', '/api/boards/103/unstar')
               .then(response => {
