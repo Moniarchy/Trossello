@@ -252,7 +252,7 @@ class BoardShowPage extends React.Component {
         <span title="Click to star this board. It will show up at top of your boards list.">
           <StarIcon board={board} />
         </span>
-        <div>
+        <div className="BoardShowPage-Header-SideMenu">
           <DownloadBoardButton boardId={board.id}/>
           <InviteByEmailButton boardId={board.id}/>
           <LeaveBoardButton boardId={board.id}/>

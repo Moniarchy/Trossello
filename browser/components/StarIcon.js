@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import $ from 'jquery'
 import Button from './Button'
 import boardsStore from '../stores/boardsStore'
+import boardStore from '../stores/boardStore'
 import './StarIcon.sass'
 
 class StarIcon extends Component {
@@ -26,6 +27,7 @@ class StarIcon extends Component {
         url: `/api/boards/${this.props.board.id}/unstar`
       }).then(() => {
         boardsStore.reload()
+        boardStore.reload()
       })
     } else {
       $.ajax({
@@ -33,6 +35,7 @@ class StarIcon extends Component {
         url: `/api/boards/${this.props.board.id}/star`
       }).then(() => {
         boardsStore.reload()
+        boardStore.reload()
       })
     }
     

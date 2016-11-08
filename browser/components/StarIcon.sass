@@ -5,6 +5,7 @@
 
   &:hover
     transform: scale(1.2)
+    cursor: pointer
 
 .LoggedInHomepage-Board
   &:hover
@@ -15,6 +16,28 @@
 .BoardsDropdown-link
   & .StarIcon-Container
     margin-right: 8px
+  &:hover
+    & .star-inactive
+      opacity: 1
+      margin-right: 0
+
+.BoardShowPage-Header
+  & .StarIcon-Container
+    & .fa-star-o
+      opacity: 1
+      transition: none
+      margin-right: 0
+      transform: none
+      padding: 9px
+      margin-left: 10px
+      border-radius: 3px
+    & .star-active
+      background-color: rgba(0,0,0,.12)
+      &:hover
+        background-color: rgba(0,0,0,.3)
+    & .star-inactive
+      &:hover
+        background-color: rgba(0,0,0,.12)
 
 .star-inactive
   color:#fff
