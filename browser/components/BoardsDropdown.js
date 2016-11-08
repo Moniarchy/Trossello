@@ -5,9 +5,10 @@ import boardsStore from '../stores/boardsStore'
 import Link from './Link'
 import CreateBoardPopover from './CreateBoardPopover'
 import ToggleComponent from './ToggleComponent'
+import StarButton from './StarButton'
 
 class BoardsDropdown extends ToggleComponent {
-  
+
   render() {
     const dropdown = this.state.open ?
       <Dropdown ref="toggle" boards={this.props.boards} close={this.close} /> :
@@ -53,6 +54,9 @@ const Board = ({board, onClick}) => {
       <span className="BoardsDropdown-thumbnail" style={{backgroundColor: board.background_color}}></span>
       <span className="BoardsDropdown-text">
         <span className="BoardsDropdown-title">{board.name}</span>
+      </span>
+      <span title="Click to star this board. It will show up at top of your boards list.">
+      <StarButton board={board} />
       </span>
     </Link>
   </div>

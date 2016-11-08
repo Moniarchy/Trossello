@@ -12,9 +12,13 @@ class StarButton extends Component {
   constructor(props){
     super(props)
     this.starUnstarBoard = this.starUnstarBoard.bind(this)
+    this.state = {
+      starred: this.props.board.starred,
+    }
   }
 
   starUnstarBoard(event) {
+    console.log(this.props.board)
     event.stopPropagation()
     event.preventDefault()
     if (this.props.board.starred) {
@@ -32,11 +36,12 @@ class StarButton extends Component {
         boardsStore.reload()
       })
     }
+    this.setState({ starred: !this.state.starred})
   }
 
 
   render(){
-    const starred = this.props.board.starred ? <i className="fa fa-star" aria-hidden="true"></i> : <i className="fa fa-star-o" aria-hidden="true"></i>
+    const starred = this.state.starred ? <i className="fa fa-star" aria-hidden="true"></i> : <i className="fa fa-star-o" aria-hidden="true"></i>
     return <Button onClick={this.starUnstarBoard}>
      {starred}
     </Button>
