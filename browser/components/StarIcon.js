@@ -14,10 +14,10 @@ class StarIcon extends Component {
 
   constructor(props){
     super(props)
-    this.starUnstarBoard = this.starUnstarBoard.bind(this)
+    this.toggleStar = this.toggleStar.bind(this)
   }
 
-  starUnstarBoard(event) {
+  toggleStar(event) {
     event.stopPropagation()
     event.preventDefault()
     let url = ""
@@ -37,7 +37,7 @@ class StarIcon extends Component {
  
   render(){
     const starred = this.props.board.starred ? <i className="fa fa-star-o star-active" aria-hidden="true"></i> : <i className="fa fa-star-o star-inactive" aria-hidden="true"></i>
-    return <span className="StarIcon-Container" title="Click to star this board. It will show up at top of your boards list." onClick={this.starUnstarBoard}>
+    return <span className="StarIcon-Container" title="Click to star this board. It will show up at top of your boards list." onClick={this.toggleStar}>
      {starred}
     </span>
   }

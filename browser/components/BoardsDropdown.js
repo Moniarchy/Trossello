@@ -8,7 +8,6 @@ import ToggleComponent from './ToggleComponent'
 import StarIcon from './StarIcon'
 
 class BoardsDropdown extends ToggleComponent {
-
   render() {
     const dropdown = this.state.open ?
       <Dropdown ref="toggle" boards={this.props.boards} close={this.close} /> :
@@ -24,16 +23,15 @@ class Dropdown extends ToggleComponent {
   render(){
     let starredBoards
     let personalBoards
-
     if (this.props.boards === null){
       personalBoards = <div>Loading. . .</div>
-      starredBoards = <div>Loading. . .</div>
+      starredBoards = ""
     }else{
       personalBoards = this.props.boards.map(board =>
         <Board key={board.id} board={board} onClick={this.props.close} />
         )
       starredBoards = this.props.boards.filter(board=> board.starred).map(board =>
-    <Board key={board.id} board={board} />
+    <Board key={board.id} board={board} onClick={this.props.close} />
       )
     }
     const personalHeaderToggler = personalBoards.length ? <div className="BoardsDropdown-sidebar-header">

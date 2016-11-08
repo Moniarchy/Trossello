@@ -10,18 +10,12 @@ const LoggedInHomepage = (props) => {
   const { boards } = props
   return <Layout className="LoggedInHomepage">
     <StarredBoards boards={boards} />
-  <div className="LoggedInHomepage-BoardListHeading">
+    <div className="LoggedInHomepage-BoardListHeading">
       All Boards
-  </div>
+    </div>
     <AllBoards boards={boards} />
   </Layout>
 }
-
-export default createStoreProvider({
-  as: 'boards',
-  store: boardsStore,
-  render: LoggedInHomepage,
-})
 
 const AllBoards = ({boards}) => {
   if (!boards) return null
@@ -41,24 +35,26 @@ const StarredBoards = ({boards}) => {
   const starHeaderToggler = elements.length ? <div className="LoggedInHomepage-BoardListHeading">
       Starred Boards
   </div> : null
-  return  <div className="LoggedInHomepage-StarredBoards">
+  return <div className="LoggedInHomepage-StarredBoards">
     {starHeaderToggler}
     {elements}
   </div>
 }
 
-
 const Board = ({board}) => {
-
     const style = {
       backgroundColor: board.background_color
     }
     return  <Link style={style} to={`/boards/${board.id}`} className="LoggedInHomepage-Board">
       <div className="LoggedInHomepage-Board-Contents">
         {board.name}
-        <StarIcon board={board} storeType="boards"  />
+        <StarIcon board={board} storeType="boards" />
       </div>
     </Link>
 }
 
-
+export default createStoreProvider({
+  as: 'boards',
+  store: boardsStore,
+  render: LoggedInHomepage,
+})
