@@ -8,7 +8,7 @@ import ToggleComponent from './ToggleComponent'
 import StarIcon from './StarIcon'
 
 class BoardsDropdown extends ToggleComponent {
-  
+
   render() {
     const dropdown = this.state.open ?
       <Dropdown ref="toggle" boards={this.props.boards} close={this.close} /> :
@@ -69,7 +69,13 @@ const Board = ({board, onClick}) => {
       <span className="BoardsDropdown-text">
         <span className="BoardsDropdown-title">{board.name}</span>
       </span>
+<<<<<<< da90b15d662be8b08a894894dd05ac009d4cb64e
       <StarIcon board={board} storeType="boards" />
+=======
+      <span title="Click to star this board. It will show up at top of your boards list.">
+      <StarButton board={board} />
+      </span>
+>>>>>>> Star works on board and board dropdown
     </Link>
   </div>
 }
