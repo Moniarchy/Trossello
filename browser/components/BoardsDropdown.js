@@ -7,6 +7,7 @@ import CreateBoardPopover from './CreateBoardPopover'
 import ToggleComponent from './ToggleComponent'
 
 class BoardsDropdown extends ToggleComponent {
+  
   render() {
     const dropdown = this.state.open ?
       <Dropdown ref="toggle" boards={this.props.boards} close={this.close} /> :

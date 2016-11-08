@@ -8,9 +8,13 @@ import Link from './Link'
 const LoggedInHomepage = (props) => {
   const { boards } = props
   return <Layout className="LoggedInHomepage">
-    <div className="LoggedInHomepage-BoardListHeading">
+  <div className="LoggedInHomepage-BoardListHeading">
+      Starred Boards
+  </div>
+    <StarredBoards boards={boards} />
+  <div className="LoggedInHomepage-BoardListHeading">
       All Boards
-    </div>
+  </div>
     <Boards boards={boards} />
   </Layout>
 }
@@ -32,6 +36,17 @@ const Boards = ({boards}) => {
     {elements}
   </div>
 }
+
+const StarredBoards = ({boards}) => {
+  if (!boards) return null
+  const elements = boards.filter(board=> board.starred).map(board =>
+    <Board key={board.id} board={board} />
+  )
+  return <div className="LoggedInHomepage-StarredBoards">
+    {elements}
+  </div>
+}
+
 
 const Board = ({board}) => {
   const style = {
