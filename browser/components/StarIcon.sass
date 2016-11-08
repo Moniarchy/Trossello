@@ -1,0 +1,26 @@
+@import "../style.sass"
+
+.fa-star-o
+  transition: transform 0.2s
+
+  &:hover
+    transform: scale(1.2)
+
+.LoggedInHomepage-Board
+  &:hover
+    & .star-inactive
+      opacity: 1
+      margin-right: 0
+
+.BoardsDropdown-link
+  & .StarIcon-Container
+    margin-right: 8px
+
+.star-inactive
+  color:#fff
+  opacity: 0
+  margin-right: -10px
+  transition: opacity 0.25s, margin-right 0.25s, transform 0.2s
+
+.star-active
+  color: #E6C60D

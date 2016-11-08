@@ -13,7 +13,7 @@ import Card from './BoardShowPage/Card'
 import NewListForm from './BoardShowPage/NewListForm'
 import InviteByEmailButton from './InviteByEmailButton'
 import LeaveBoardButton from './BoardShowPage/LeaveBoardButton'
-import StarButton from './StarButton'
+import StarIcon from './StarIcon'
 
 class BoardProvider extends Component {
   constructor(props){
@@ -250,7 +250,7 @@ class BoardShowPage extends React.Component {
           {board.name}
         </h1>
         <span title="Click to star this board. It will show up at top of your boards list.">
-          <StarButton board={board} />
+          <StarIcon board={board} />
         </span>
         <div>
           <DownloadBoardButton boardId={board.id}/>

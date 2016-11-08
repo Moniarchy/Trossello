@@ -5,7 +5,7 @@ import boardsStore from '../stores/boardsStore'
 import Link from './Link'
 import CreateBoardPopover from './CreateBoardPopover'
 import ToggleComponent from './ToggleComponent'
-import StarButton from './StarButton'
+import StarIcon from './StarIcon'
 
 class BoardsDropdown extends ToggleComponent {
 
@@ -55,9 +55,7 @@ const Board = ({board, onClick}) => {
       <span className="BoardsDropdown-text">
         <span className="BoardsDropdown-title">{board.name}</span>
       </span>
-      <span title="Click to star this board. It will show up at top of your boards list.">
-      <StarButton board={board} />
-      </span>
+      <StarIcon board={board} />
     </Link>
   </div>
 }

@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import $ from 'jquery'
 import Button from './Button'
 import boardsStore from '../stores/boardsStore'
+import './StarIcon.sass'
 
-class StarButton extends Component {
+class StarIcon extends Component {
 
   static propTypes = {
     board: React.PropTypes.object.isRequired
@@ -20,7 +21,7 @@ class StarButton extends Component {
   starUnstarBoard(event) {
     event.stopPropagation()
     event.preventDefault()
-    
+
     if (this.props.board.starred) {
       $.ajax({
         method: "POST",
@@ -40,11 +41,11 @@ class StarButton extends Component {
   }
 
   render(){
-    const starred = this.state.starred ? <i className="fa fa-star" aria-hidden="true"></i> : <i className="fa fa-star-o" aria-hidden="true"></i>
-    return <Button onClick={this.starUnstarBoard}>
+    const starred = this.state.starred ? <i className="fa fa-star-o star-active" aria-hidden="true"></i> : <i className="fa fa-star-o star-inactive" aria-hidden="true"></i>
+    return <span className="StarIcon-Container" title="Click to star this board. It will show up at top of your boards list." onClick={this.starUnstarBoard}>
      {starred}
-    </Button>
+    </span>
   }
 }
 
-export default StarButton
+export default StarIcon
