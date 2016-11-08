@@ -70,7 +70,7 @@ const Board = ({board, onClick}) => {
       <span className="BoardsDropdown-text">
         <span className="BoardsDropdown-title">{board.name}</span>
       </span>
-      <StarIcon board={board} />
+      <StarIcon board={board} storeType="boards" />
     </Link>
   </div>
 }

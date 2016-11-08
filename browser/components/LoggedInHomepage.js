@@ -56,7 +56,7 @@ const Board = ({board}) => {
     return  <Link style={style} to={`/boards/${board.id}`} className="LoggedInHomepage-Board">
       <div className="LoggedInHomepage-Board-Contents">
         {board.name}
-        <StarIcon board={board}  />
+        <StarIcon board={board} storeType="boards"  />
       </div>
     </Link>
 }
