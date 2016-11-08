@@ -13,7 +13,7 @@ const LoggedInHomepage = (props) => {
   <div className="LoggedInHomepage-BoardListHeading">
       All Boards
   </div>
-    <Boards boards={boards} />
+    <AllBoards boards={boards} />
   </Layout>
 }
 
@@ -23,7 +23,7 @@ export default createStoreProvider({
   render: LoggedInHomepage,
 })
 
-const Boards = ({boards}) => {
+const AllBoards = ({boards}) => {
   if (!boards) return null
   const elements = boards.map(board =>
     <Board key={board.id} board={board} />
@@ -46,15 +46,20 @@ const StarredBoards = ({boards}) => {
     {elements}
   </div>
 }
-
-const Board = ({board}) => {
-  const style = {
-    backgroundColor: board.background_color
+class Board extends Component {
+  static propTypes = {
+    board: React.PropTypes.object.isRequired
   }
-  return <Link style={style} to={`/boards/${board.id}`} className="LoggedInHomepage-Board">
-    <div className="LoggedInHomepage-Board-Contents">
-      {board.name}
-      <StarIcon key={board.id} board={board} />
-    </div>
-  </Link>
+  render() {
+    const style = {
+      backgroundColor: this.props.board.background_color
+    }
+    return  <Link style={style} to={`/boards/${this.props.board.id}`} className="LoggedInHomepage-Board">
+      <div className="LoggedInHomepage-Board-Contents">
+        {this.props.board.name}
+        <StarIcon board={this.props.board}  />
+      </div>
+    </Link>
+  }
+
 }
