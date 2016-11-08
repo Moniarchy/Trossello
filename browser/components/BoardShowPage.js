@@ -15,7 +15,6 @@ import InviteByEmailButton from './InviteByEmailButton'
 import LeaveBoardButton from './BoardShowPage/LeaveBoardButton'
 import StarButton from './StarButton'
 
-
 class BoardProvider extends Component {
   constructor(props){
     super(props)
@@ -46,7 +45,6 @@ class BoardProvider extends Component {
     const viewingCard = viewingCardId ? Number(viewingCardId) : null
     return <BoardShowPage board={boardStore.value} viewingCard={viewingCard} />
   }
-
 }
 
 export default BoardProvider
@@ -245,7 +243,6 @@ class BoardShowPage extends React.Component {
       />
     }
 
-
     return <Layout className="BoardShowPage" style={style}>
       {cardModal}
       <div className="BoardShowPage-Header">
@@ -279,7 +276,6 @@ class BoardShowPage extends React.Component {
 const DownloadBoardButton = (props) => {
   return <Button type="invisible" className="BoardShowPage-button BoardShowPage-DeleteBoardButton" href={`/api/boards/${props.boardId}?download=1`}>Export Board</Button>
 }
-
 
 const clearTextSelection = () => {
   var sel = window.getSelection ?

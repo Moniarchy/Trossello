@@ -9,9 +9,6 @@ import StarButton from './StarButton'
 const LoggedInHomepage = (props) => {
   const { boards } = props
   return <Layout className="LoggedInHomepage">
-  <div className="LoggedInHomepage-BoardListHeading">
-      Starred Boards
-  </div>
     <StarredBoards boards={boards} />
   <div className="LoggedInHomepage-BoardListHeading">
       All Boards
@@ -20,13 +17,11 @@ const LoggedInHomepage = (props) => {
   </Layout>
 }
 
-
 export default createStoreProvider({
   as: 'boards',
   store: boardsStore,
   render: LoggedInHomepage,
 })
-
 
 const Boards = ({boards}) => {
   if (!boards) return null
@@ -43,11 +38,14 @@ const StarredBoards = ({boards}) => {
   const elements = boards.filter(board=> board.starred).map(board =>
     <Board key={board.id} board={board} />
   )
-  return <div className="LoggedInHomepage-StarredBoards">
+  const starHeaderToggler = elements.length ? <div className="LoggedInHomepage-BoardListHeading">
+      Starred Boards
+  </div> : null
+  return  <div className="LoggedInHomepage-StarredBoards">
+    {starHeaderToggler}
     {elements}
   </div>
 }
-
 
 const Board = ({board}) => {
   const style = {

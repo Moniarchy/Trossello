@@ -62,7 +62,6 @@ const Board = ({board, onClick}) => {
   </div>
 }
 
-
 export default createStoreProvider({
   as: 'boards',
   store: boardsStore,
