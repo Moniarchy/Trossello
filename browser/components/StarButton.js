@@ -18,9 +18,9 @@ class StarButton extends Component {
   }
 
   starUnstarBoard(event) {
-    console.log(this.props.board)
     event.stopPropagation()
     event.preventDefault()
+    
     if (this.props.board.starred) {
       $.ajax({
         method: "POST",
@@ -38,7 +38,6 @@ class StarButton extends Component {
     }
     this.setState({ starred: !this.state.starred})
   }
-
 
   render(){
     const starred = this.state.starred ? <i className="fa fa-star" aria-hidden="true"></i> : <i className="fa fa-star-o" aria-hidden="true"></i>
