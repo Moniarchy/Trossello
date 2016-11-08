@@ -4,6 +4,7 @@ import createStoreProvider from './createStoreProvider'
 import boardsStore from '../stores/boardsStore'
 import Layout from './Layout'
 import Link from './Link'
+import StarButton from './StarButton'
 
 const LoggedInHomepage = (props) => {
   const { boards } = props
@@ -53,6 +54,11 @@ const Board = ({board}) => {
     backgroundColor: board.background_color
   }
   return <Link style={style} to={`/boards/${board.id}`} className="LoggedInHomepage-Board">
-    <div>{board.name}</div>
+    <div>
+      {board.name}
+      <span title="Click to star this board. It will show up at top of your boards list.">
+        <StarButton key={board.id} board={board} />
+      </span>
+    </div>
   </Link>
 }

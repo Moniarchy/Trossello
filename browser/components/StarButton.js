@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import Icon from '../Icon'
-import Button from '../Button'
+import $ from 'jquery'
+import Button from './Button'
+import boardsStore from '../stores/boardsStore'
 
 class StarButton extends Component {
 
@@ -10,25 +11,34 @@ class StarButton extends Component {
 
   constructor(props){
     super(props)
-    this.starBoard = this.starBoard.bind(this)
+    this.starUnstarBoard = this.starUnstarBoard.bind(this)
   }
 
-  starBoard(){
-    $.ajax({
-      method: "POST",
-      url: `/api/boards/${this.props.board.id}/star`
-    }).then(() => {
-      boardsStore.reload()
-    })
+  starUnstarBoard(event) {
+    event.stopPropagation()
+    event.preventDefault()
+    if (this.props.board.starred) {
+      $.ajax({
+        method: "POST",
+        url: `/api/boards/${this.props.board.id}/unstar`
+      }).then(() => {
+        boardsStore.reload()
+      })
+    } else {
+      $.ajax({
+        method: "POST",
+        url: `/api/boards/${this.props.board.id}/star`
+      }).then(() => {
+        boardsStore.reload()
+      })
+    }
   }
 
-  starred(){
-    (this.board.starred)?"Unstar" : "Star"
-  }
 
   render(){
-    return <Button onClick={this.starBoard}>
-    <Icon type="star" /> {starred}
+    const starred = this.props.board.starred ? <i className="fa fa-star" aria-hidden="true"></i> : <i className="fa fa-star-o" aria-hidden="true"></i>
+    return <Button onClick={this.starUnstarBoard}>
+     {starred}
     </Button>
   }
 }

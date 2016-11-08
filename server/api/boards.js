@@ -116,7 +116,7 @@ router.post('/:boardId/leave', (request, response, next) => {
 router.post('/:boardId/star', (request, response, next) => {
   const {boardId} = request.params
   commands.starBoard(boardId)
-    .then( () => {
+    .then( board => {
       response.json(null)
     })
     .catch(next)
