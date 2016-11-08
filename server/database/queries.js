@@ -20,15 +20,6 @@ const getBoardsByUserId = (userId) =>
     .whereIn('user_boards.user_id', userId)
     .where('archived', false)
 
-const getStarredBoardsByUserId = (userId) =>
-  knex.table('boards')
-    .select('boards.*')
-    .join('user_boards', 'boards.id', '=', 'user_boards.board_id')
-    .whereIn('user_boards.user_id', userId)
-    .where({archived: false,
-            starred: true
-          })
-
 const getBoardById = (id) =>
   getRecordById('boards', id).then(getListsAndCardsForBoard)
 
