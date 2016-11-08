@@ -191,6 +191,36 @@ describe('/api/boards', () => {
           })
         })
 
+        // Star Board
+        describe('POST /api/boards/<existing board id>/star', () => {
+          it('should set starred to true and return 200', () => {
+            return request('post', '/api/boards/102/star')
+              .then(response => {
+                expect(response).to.have.status(200)
+              })
+              .then( () => request('get', '/api/boards/102'))
+              .then(response => {
+                expect(response).to.have.status(200)
+                expect(response.body.starred).to.eql(true)
+              })
+          })
+        })
+
+        // Unstar Board
+        describe.only('POST /api/boards/<existing board id>/unstar', () => {
+          it('should set starred to false and return 200', () => {
+            return request('post', '/api/boards/103/unstar')
+              .then(response => {
+                expect(response).to.have.status(200)
+              })
+              .then( () => request('get', '/api/boards/103'))
+              .then(response => {
+                expect(response).to.have.status(200)
+                expect(response.body.starred).to.eql(false)
+              })
+          })
+        })
+
 
         // CREATE LIST
         describe('POST /api/boards/:boardId/lists', () => {
