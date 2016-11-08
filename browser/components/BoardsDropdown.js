@@ -22,17 +22,32 @@ class BoardsDropdown extends ToggleComponent {
 
 class Dropdown extends ToggleComponent {
   render(){
-    let boards
+    let starredBoards
+    let personalBoards
+
     if (this.props.boards === null){
-      boards = <div>Loading. . .</div>
+      personalBoards = <div>Loading. . .</div>
+      starredBoards = <div>Loading. . .</div>
     }else{
-      boards = this.props.boards.map(board =>
+      personalBoards = this.props.boards.map(board =>
         <Board key={board.id} board={board} onClick={this.props.close} />
+        )
+      starredBoards = this.props.boards.filter(board=> board.starred).map(board =>
+    <Board key={board.id} board={board} />
       )
     }
+    const personalHeaderToggler = personalBoards.length ? <div className="BoardsDropdown-sidebar-header">
+      Personal Boards
+  </div> : null
+    const starHeaderToggler = starredBoards.length ? <div className="BoardsDropdown-sidebar-header">
+      Starred Boards
+  </div> : null
     return <div className="BoardsDropdown-dropdown">
       <div className="BoardsDropdown-content">
-        {boards}
+        {starHeaderToggler}
+        {starredBoards}
+        {personalHeaderToggler}
+        {personalBoards}
         <Link onClick={this.toggle}>Create new board...</Link>
       </div>
       {this.state.open ?

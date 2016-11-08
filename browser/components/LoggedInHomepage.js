@@ -46,23 +46,7 @@ const StarredBoards = ({boards}) => {
     {elements}
   </div>
 }
-// class Board extends Component {
-//   static propTypes = {
-//     board: React.PropTypes.object.isRequired
-//   }
-//   render() {
-//     const style = {
-//       backgroundColor: this.props.board.background_color
-//     }
-//     return  <Link style={style} to={`/boards/${this.props.board.id}`} className="LoggedInHomepage-Board">
-//       <div className="LoggedInHomepage-Board-Contents">
-//         {this.props.board.name}
-//         <StarIcon board={this.props.board}  />
-//       </div>
-//     </Link>
-//   }
 
-// }
 
 const Board = ({board}) => {
 
