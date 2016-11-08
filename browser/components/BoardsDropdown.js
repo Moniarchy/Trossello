@@ -8,6 +8,7 @@ import ToggleComponent from './ToggleComponent'
 import StarIcon from './StarIcon'
 
 class BoardsDropdown extends ToggleComponent {
+  
   render() {
     const dropdown = this.state.open ?
       <Dropdown ref="toggle" boards={this.props.boards} close={this.close} /> :
