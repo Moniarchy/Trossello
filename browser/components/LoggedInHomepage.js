@@ -6,6 +6,7 @@ import Layout from './Layout'
 import Link from './Link'
 import StarIcon from './StarIcon'
 
+
 const LoggedInHomepage = (props) => {
   const { boards } = props
   return <Layout className="LoggedInHomepage">
@@ -50,6 +51,7 @@ const StarredBoards = ({boards}) => {
 
 >>>>>>> add routes to star boards
 const Board = ({board}) => {
+<<<<<<< cf8047d06595a90cb160e21a35785fc5c8b47aad
     const style = {
       backgroundColor: board.background_color
     }
@@ -59,6 +61,19 @@ const Board = ({board}) => {
         <StarIcon board={board} storeType="boards" />
       </div>
     </Link>
+=======
+  const style = {
+    backgroundColor: board.background_color
+  }
+  return <Link style={style} to={`/boards/${board.id}`} className="LoggedInHomepage-Board">
+    <div>
+      {board.name}
+      <span title="Click to star this board. It will show up at top of your boards list.">
+        <StarButton key={board.id} board={board} />
+      </span>
+    </div>
+  </Link>
+>>>>>>> Star and unstar work on homepage
 }
 
 export default createStoreProvider({
