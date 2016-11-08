@@ -6,7 +6,6 @@ import Layout from './Layout'
 import Link from './Link'
 import StarIcon from './StarIcon'
 
-
 const LoggedInHomepage = (props) => {
   const { boards } = props
   return <Layout className="LoggedInHomepage">
