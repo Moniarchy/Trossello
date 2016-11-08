@@ -25,7 +25,7 @@ const getStarredBoardsByUserId = (userId) =>
     .select('boards.*')
     .join('user_boards', 'boards.id', '=', 'user_boards.board_id')
     .whereIn('user_boards.user_id', userId)
-    .where({archived: false
+    .where({archived: false,
             starred: true
           })
 
