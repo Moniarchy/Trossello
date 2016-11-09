@@ -7,7 +7,7 @@ router.get('/', (request, response, next) => {
   queries.getBoardsByUserId(request.session.userId).then(boards => {
     response.json(boards)
   }).catch(next)
-} )
+})
 
 //SEARCH
 router.post('/search', ( request, response, next ) => {

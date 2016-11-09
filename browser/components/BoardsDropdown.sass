@@ -47,6 +47,23 @@
     text-decoration: none
     align-items: center
 
+    .StarIcon
+      // margin-right: 8px
+
+    .StarIcon-unstarred
+      color: grey
+    &:hover
+      .StarIcon-unstarred
+        opacity: 1
+        margin-right: 0
+        &:hover
+          color: black
+    // & .star-inactive
+    //   transition: color 0.2s, margin-right 0.2s, opacity 0.2s
+    //   color: grey
+    //   &:hover
+    //     color: black
+
   &-thumbnail
     flex: 0 0 auto
     background-size: cover

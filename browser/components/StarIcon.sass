@@ -1,58 +1,64 @@
 @import "../style.sass"
 
-.fa-star-o
+.StarIcon
   transition: transform 0.2s
 
   &:hover
     transform: scale(1.2)
     cursor: pointer
 
-.LoggedInHomepage-Board
-  &:hover
-    & .star-inactive
-      opacity: .8
-      margin-right: 0
-  & .star-inactive
+  &-unstarred
+    color: #fff
+    opacity: 0
+    // margin-right: -10px
+    transition: opacity 0.25s, margin-right 0.25s, transform 0.2s
     &:hover
       opacity: 1
+      // margin-right: 0px
 
-.BoardsDropdown-link
-  & .StarIcon-Container
-    margin-right: 8px
-  &:hover
-    & .star-inactive
-      opacity: 1
-      margin-right: 0
-      color: grey
-  & .star-inactive
-    transition: color 0.2s, margin-right 0.2s, opacity 0.2s
-    color: grey
-    &:hover
-      color: black
 
-.BoardShowPage-Header
-  & .StarIcon-Container
-    & .fa-star-o
-      opacity: 1
-      transition: none
-      margin-right: 0
-      transform: none
-      padding: 9px
-      margin-left: 10px
-      border-radius: 3px
-    & .star-active
-      background-color: rgba(0,0,0,.12)
-      &:hover
-        background-color: rgba(0,0,0,.3)
-    & .star-inactive
-      &:hover
-        background-color: rgba(0,0,0,.12)
+  &-starred
+    color: #E6C60D
 
-.star-inactive
-  color:#fff
-  opacity: 0
-  margin-right: -10px
-  transition: opacity 0.25s, margin-right 0.25s, transform 0.2s
 
-.star-active
-  color: #E6C60D
+
+// .LoggedInHomepage-Board
+//   &:hover
+//     & .star-inactive
+//       opacity: .8
+//       margin-right: 0
+//   & .star-inactive
+//     &:hover
+//       opacity: 1
+
+// .BoardsDropdown-link
+//   & .StarIcon-Container
+//     margin-right: 8px
+//   &:hover
+//     & .star-inactive
+//       opacity: 1
+//       margin-right: 0
+//       color: grey
+//   & .star-inactive
+//     transition: color 0.2s, margin-right 0.2s, opacity 0.2s
+//     color: grey
+//     &:hover
+//       color: black
+
+// .BoardShowPage-Header
+//   & .StarIcon-Container
+//     & .fa-star-o
+//       opacity: 1
+//       transition: none
+//       margin-right: 0
+//       transform: none
+//       padding: 9px
+//       margin-left: 10px
+//       border-radius: 3px
+//     & .star-active
+//       background-color: rgba(0,0,0,.12)
+//       &:hover
+//         background-color: rgba(0,0,0,.3)
+//     & .star-inactive
+//       &:hover
+//         background-color: rgba(0,0,0,.12)
