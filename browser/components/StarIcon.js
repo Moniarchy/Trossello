@@ -1,15 +1,13 @@
+import './StarIcon.sass'
 import React, {Component} from 'react'
 import $ from 'jquery'
-import Button from './Button'
-import boardsStore from '../stores/boardsStore'
-import boardStore from '../stores/boardStore'
-import './StarIcon.sass'
+import Icon from './Icon'
 
 class StarIcon extends Component {
 
   static propTypes = {
     board: React.PropTypes.object.isRequired,
-    storeType: React.PropTypes.string.isRequired
+    store: React.PropTypes.object.isRequired
   }
 
   constructor(props){
@@ -27,11 +25,7 @@ class StarIcon extends Component {
       method: "POST",
       url: url
     }).then(() => {
-      if (this.props.storeType === "boards") {
-        boardsStore.reload()
-      } else {
-        boardStore.reload()
-      }
+      this.props.store.reload()
     })
   }
 

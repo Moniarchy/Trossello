@@ -51,7 +51,7 @@ const Board = ({board}) => {
   return  <Link style={style} href={`/boards/${board.id}`} className="LoggedInHomepage-Board">
     <div className="LoggedInHomepage-Board-Contents">
       {board.name}
-      <StarIcon board={board} storeType="boards" />
+      <StarIcon board={board} store={boardsStore} />
     </div>
   </Link>
 }
