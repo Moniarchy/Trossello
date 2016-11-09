@@ -21,42 +21,59 @@ class BoardsDropdown extends ToggleComponent {
 
 class Dropdown extends ToggleComponent {
   render(){
-    let starredBoards
-    let personalBoards
-    if (this.props.boards === null){
-      personalBoards = <div>Loading. . .</div>
-      starredBoards = ""
-    }else{
-      personalBoards = this.props.boards.map(board =>
-        <Board key={board.id} board={board} onClick={this.props.close} />
-        )
-      starredBoards = this.props.boards.filter(board=> board.starred).map(board =>
-    <Board key={board.id} board={board} onClick={this.props.close} />
+    const { boards } = this.props
+    let content
+
+    if (!boards) {
+      return <div className="BoardsDropdown-dropdown">
+        <div className="BoardsDropdown-content">
+          <div>Loading…</div>
+        </div>
+      </div>
+    }
+
+    let starredBoards = boards.filter(board => board.starred)
+    let notStarredBoards = boards.filter(board => !board.starred)
+
+    const renderBoard = board => (
+      <Board key={board.id} board={board} onClick={this.props.close} />
+    )
+
+    starredBoards = starredBoards.map(renderBoard)
+    notStarredBoards = notStarredBoards.map(renderBoard)
+
+    if (starredBoards.length > 0) {
+      starredBoards.unshift(
+        <div key="header" className="BoardsDropdown-sidebar-header">
+          Starred Boards
+        </div>
       )
     }
-    const personalHeaderToggler = personalBoards.length ? <div className="BoardsDropdown-sidebar-header">
-      Personal Boards
-  </div> : null
-    const starHeaderToggler = starredBoards.length ? <div className="BoardsDropdown-sidebar-header">
-      Starred Boards
-  </div> : null
+    if (notStarredBoards.length > 0) {
+      notStarredBoards.unshift(
+        <div key="header" className="BoardsDropdown-sidebar-header">
+          Personal Boards
+        </div>
+      )
+    }
+
+    var createBoardPopover = this.state.open ?
+      <CreateBoardPopover
+        ref="toggle"
+        onClose={this.close}
+        onSave={this.props.close}
+      /> :
+      null
+
     return <div className="BoardsDropdown-dropdown">
       <div className="BoardsDropdown-content">
-        {starHeaderToggler}
         {starredBoards}
-        {personalHeaderToggler}
-        {personalBoards}
+        {notStarredBoards}
         <Link onClick={this.toggle}>Create new board...</Link>
       </div>
-      {this.state.open ?
-        <CreateBoardPopover
-          ref="toggle"
-          onClose={this.close}
-          onSave={this.props.close}
-        /> :
-        null
-      }
+      {createBoardPopover}
     </div>
+
   }
 }
 
