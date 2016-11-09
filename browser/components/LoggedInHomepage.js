@@ -8,49 +8,52 @@ import StarIcon from './StarIcon'
 
 const LoggedInHomepage = (props) => {
   const { boards } = props
+
+  if (!boards) {
+    return <Layout className="LoggedInHomepage">
+      <div>Loading…</div>
+    </Layout>
+  }
+
+  let starredBoards = boards.filter(board => board.starred)
+  if (starredBoards.length > 0) {
+    starredBoards = <Boards title="Starred Boards" boards={starredBoards} />
+  }
+
   return <Layout className="LoggedInHomepage">
-    <StarredBoards boards={boards} />
-    <div className="LoggedInHomepage-BoardListHeading">
-      All Boards
-    </div>
-    <AllBoards boards={boards} />
+    {starredBoards}
+    <Boards title="All Boards" boards={boards} />
   </Layout>
 }
 
-const AllBoards = ({boards}) => {
+const Boards = ({title, boards}) => {
   if (!boards) return null
+
   const elements = boards.map(board =>
     <Board key={board.id} board={board} />
   )
-  return <div className="LoggedInHomepage-Boards">
-    {elements}
-  </div>
-}
 
-const StarredBoards = ({boards}) => {
-  if (!boards) return null
-  const elements = boards.filter(board=> board.starred).map(board =>
-    <Board key={board.id} board={board} />
-  )
-  const starHeaderToggler = elements.length ? <div className="LoggedInHomepage-BoardListHeading">
-      Starred Boards
-  </div> : null
-  return <div className="LoggedInHomepage-StarredBoards">
-    {starHeaderToggler}
+  return <div>
+    <div className="LoggedInHomepage-BoardListHeading">
+      {title}
+    </div>
+    <div className="LoggedInHomepage-Boards">
     {elements}
+    </div>
   </div>
 }
 
 const Board = ({board}) => {
-    const style = {
-      backgroundColor: board.background_color
-    }
-    return  <Link style={style} to={`/boards/${board.id}`} className="LoggedInHomepage-Board">
-      <div className="LoggedInHomepage-Board-Contents">
-        {board.name}
-        <StarIcon board={board} storeType="boards" />
-      </div>
-    </Link>
+  const style = {
+    backgroundColor: board.background_color
+  }
+
+  return  <Link style={style} href={`/boards/${board.id}`} className="LoggedInHomepage-Board">
+    <div className="LoggedInHomepage-Board-Contents">
+      {board.name}
+      <StarIcon board={board} storeType="boards" />
+    </div>
+  </Link>
 }
 
 export default createStoreProvider({
