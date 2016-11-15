@@ -8,9 +8,9 @@ import LogoutButton from './LogoutButton'
 import LoginButton from './LoginButton'
 import CreateBoardPopover from './CreateBoardPopover'
 import ToggleComponent from './ToggleComponent'
-import BoardsDropdown from './BoardsDropdown'
 import CardSearchForm from './CardSearchForm'
 import PopoverMenuButton from './PopoverMenuButton'
+import BoardsDropdown from './BoardsDropdown'
 
 export default class Navbar extends Component {
 
@@ -21,8 +21,9 @@ export default class Navbar extends Component {
   render(){
     const { session } = this.context
     const createBoardPopover = <CreateBoardPopover />
+    const boardsDropdownButton = session.user.boards_dropdown_lock ? null : <BoardsDropdownButton className="Navbar-button BoardButton" />
     return <div className="Navbar">
-      <BoardsDropdown className="Navbar-button BoardButton" />
+      {boardsDropdownButton}
       <CardSearchForm className="Navbar-Search" />
       <div className="Navbar-BoardIndexButton">
         <Link to="/">Trossello</Link>
@@ -43,6 +44,18 @@ export default class Navbar extends Component {
       <button className="Navbar-button AlertButton">
         <Icon type="bell" />
       </button>
+    </div>
+  }
+}
+
+class BoardsDropdownButton extends ToggleComponent {
+  render() {
+    const boardsdropdown = this.state.open ?
+      <BoardsDropdown ref="toggle" boards={this.props.boards} close={this.close} /> :
+      null
+    return <div className="BoardsDropdownButton" >
+      <button ref="button" className={this.props.className} onClick={this.toggle}>Boards</button>
+      {boardsdropdown}
     </div>
   }
 }

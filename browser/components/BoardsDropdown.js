@@ -2,24 +2,42 @@ import './BoardsDropdown.sass'
 import React, { Component } from 'react'
 import createStoreProvider from './createStoreProvider'
 import boardsStore from '../stores/boardsStore'
+import sessionStore from '../stores/sessionStore'
 import Link from './Link'
 import CreateBoardPopover from './CreateBoardPopover'
 import ToggleComponent from './ToggleComponent'
 import StarIcon from './StarIcon'
+import $ from 'jquery'
 
 class BoardsDropdown extends ToggleComponent {
-  render() {
-    const dropdown = this.state.open ?
-      <Dropdown ref="toggle" boards={this.props.boards} close={this.close} /> :
-      null
-    return <div className="BoardsDropdown" >
-      <button ref="button" className={this.props.className} onClick={this.toggle}>Boards</button>
-      {dropdown}
-    </div>
+  static contextTypes = {
+    session: React.PropTypes.object.isRequired
   }
-}
 
-class Dropdown extends ToggleComponent {
+  constructor(props){
+    super(props)
+    this.toggleBoardsDropdownLock = this.toggleBoardsDropdownLock.bind(this)
+  }
+
+  toggleBoardsDropdownLock(){
+    const {user} = this.context.session
+    if (user.boards_dropdown_lock) {
+      $.ajax({
+        method: 'post',
+        url: `/api/users/${user.id}/unlockdropdown`
+      }).then(() => {
+        sessionStore.reload()
+      })
+    } else {
+      $.ajax({
+        method: 'post',
+        url: `/api/users/${user.id}/lockdropdown`
+      }).then(() => {
+        sessionStore.reload()
+      })
+    }
+  }
+
   render(){
     const { boards } = this.props
     let content
@@ -67,6 +85,7 @@ class Dropdown extends ToggleComponent {
         {starredBoards}
         {allBoards}
         <Link onClick={this.toggle}>{this.state.open ? 'Cancel' : 'Create new board…'}</Link>
+        <Link onClick={this.toggleBoardsDropdownLock}>{this.context.session.user.boards_dropdown_lock ? 'Don\'t keep this menu open.' : 'Always keep this menu open.'}</Link>
       </div>
       {createBoardPopover}
     </div>
