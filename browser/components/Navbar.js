@@ -19,9 +19,9 @@ export default class Navbar extends Component {
   }
 
   render(){
-    const { session } = this.context
+    const { user } = this.context.session
     const createBoardPopover = <CreateBoardPopover />
-    const boardsDropdownButton = session.user.boards_dropdown_lock ? null : <BoardsDropdownButton className="Navbar-button BoardButton" />
+    const boardsDropdownButton = user.boards_dropdown_lock ? null : <BoardsDropdownButton className="Navbar-button BoardButton" />
     return <div className="Navbar">
       {boardsDropdownButton}
       <CardSearchForm className="Navbar-Search" />
@@ -37,8 +37,8 @@ export default class Navbar extends Component {
         <Icon type="plus" />
       </PopoverMenuButton>
       <button className="Navbar-button Navbar-AvatarButton">
-        <img src={session.user.avatar_url} />
-        <span>{session.user.name}</span>
+        <img src={user.avatar_url} />
+        <span>{user.name}</span>
       </button>
       <LogoutButton className="Navbar-button">Logout</LogoutButton>
       <button className="Navbar-button AlertButton">

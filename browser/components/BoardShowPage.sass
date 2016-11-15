@@ -4,40 +4,62 @@
   $button-height: 30px
   $button-margin: 4px
   $list-width: 270px
+  $MenuSideBar-width: 300px
   overflow: hidden
 
-  &-sideBarOpen
-    .BoardShowPage-lists
-      right: 300px
-    .BoardShowPage-MenuSideBar
-      right: 0
-
-  &-lists
-    display: flex
-    align-items: flex-start
-    overflow-x: auto
-    overflow-y: hidden
-    white-space: nowrap
-    padding: 0 10px
-    transition: right 200ms
-
-  &-MenuSideBar
-    position: absolute
-    top: 45px
-    right: -300px
-    bottom: 0
-    width: 300px
-    background-color: lightgrey
-    transition: right 200ms
-
-  font-family: "Helvetica Neue"
-  &-Header
-    justify-content: flex-start
+  .Layout-content
     display: flex
     flex-direction: row
-    z-index: 10
+
+
+  &-container
+    display: flex
+    flex-direction: column
+    flex-grow: 1
+    flex-shrink: 1
+    overflow: hidden
+    margin-right: -$MenuSideBar-width
+    transition: margin-right 200ms
+
+  &-MenuSideBar
+    flex-grow: 0
+    flex-shrink: 0
+    flex-basis: $MenuSideBar-width
+    position: relative
+    left: $MenuSideBar-width
+    width: $MenuSideBar-width
+    transition: left 200ms
+
+  &-sideBarOpen
+    .BoardShowPage-container
+      margin-right: 0
+    .BoardShowPage-MenuSideBar
+      left: 0
+
+  &-Header
+    flex-shrink: 0
+    flex-grow: 0
+    padding: 10px 10px 0 10px
+
+  &-lists
+    flex-shrink: 1
+    flex-grow: 1
+    display: flex
+    align-items: stretch
+    overflow-x: auto
+    overflow-y: hidden
+    // white-space: nowrap
+    padding: 10px
+
+
+
+
+
+  &-Header
+    display: flex
+    flex-direction: row
     align-items: flex-end
-    padding: 8px
+    justify-content: flex-start
     > h1
       font-family: "Helvetica Neue"
       font-weight: 500
@@ -93,14 +115,17 @@
   &-List
     flex-grow: 0
     flex-shrink: 0
-    display: inline-flex
-    flex-direction: column
-    border-radius: 5px
-    margin-right: 10px
     width: $list-width
-    max-height: calc(100% - 10px)
-    background-color: #e2e4e6
-    font-family: "Helvetica Neue"
+    margin-right: 10px
+    &-box
+      max-height: 100%
+      width: 100%
+      display: inline-flex
+      flex-direction: column
+      border-radius: 5px
+      // max-height: calc(100% - 10px)
+      background-color: #e2e4e6
+      font-family: "Helvetica Neue"
 
   &-ListHeader
     flex-grow: 0
@@ -141,9 +166,9 @@
   &-NewListForm
     flex-grow: 0
     flex-shrink: 0
-    display: inline-flex
     width: $list-width
     padding-right: 10px
+
   &-EditButton
     text-decoration: none
     opacity: 0.5

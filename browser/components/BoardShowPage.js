@@ -66,7 +66,7 @@ class BoardShowPage extends React.Component {
       dragging: null,
       sideBarOpen: false,
     }
-    this.openSideBar = this.openSideBar.bind(this)
+    this.toggleSideBar = this.toggleSideBar.bind(this)
     this.closeSideBar = this.closeSideBar.bind(this)
     this.onMouseDown = this.onMouseDown.bind(this)
     this.onMouseMove = this.onMouseMove.bind(this)
@@ -82,9 +82,9 @@ class BoardShowPage extends React.Component {
     }
   }
 
-  openSideBar(event){
+  toggleSideBar(event){
     if (event) event.preventDefault()
-    this.setState({sideBarOpen: true})
+    this.setState({sideBarOpen: !this.state.sideBarOpen})
   }
 
   closeSideBar(event){
@@ -264,29 +264,19 @@ class BoardShowPage extends React.Component {
     const className = `BoardShowPage ${this.state.sideBarOpen ? 'BoardShowPage-sideBarOpen' : ''}`
     return <Layout className={className} style={style}>
       {cardModal}
-      <div className="BoardShowPage-Header">
-        <h1>{board.name}</h1>
-        <span>
-          <StarIcon board={board} onChange={reloadBoardStores}/>
-        </span>
-        <div className="flex-spacer" />
-        <Link
-          className="BoardShowPage-menuButton"
-          onClick={this.openSideBar}
+      <div className="BoardShowPage-container">
+        <Header board={board} toggleSideBar={this.toggleSideBar} sideBarOpen={this.state.sideBarOpen} />
+        <div
+          ref="lists"
+          className="BoardShowPage-lists"
+          onMouseDown={this.onMouseDown}
+          onMouseMove={this.onMouseMove}
+          onMouseUp={this.onMouseUp}
         >
-          <Icon className='BoardShowPage-menuButton-icon' type='ellipsis-h' />Show Menu
-        </Link>
-      </div>
-      <div
-        ref="lists"
-        className="BoardShowPage-lists"
-        onMouseDown={this.onMouseDown}
-        onMouseMove={this.onMouseMove}
-        onMouseUp={this.onMouseUp}
-      >
-        {cardBeingDraggedNode}
-        {lists}
-        <NewListForm board={board} afterCreate={this.scrollToTheRight} />
+          {cardBeingDraggedNode}
+          {lists}
+          <NewListForm board={board} afterCreate={this.scrollToTheRight} />
+        </div>
       </div>
       <MenuSideBar
         onClose={this.closeSideBar}
@@ -295,6 +285,23 @@ class BoardShowPage extends React.Component {
     </Layout>
   }
 }
+
+const Header = ({board, sideBarOpen, toggleSideBar}) =>
+  <div className="BoardShowPage-Header">
+    <h1>{board.name}</h1>
+    <span>
+      <StarIcon board={board} onChange={reloadBoardStores}/>
+    </span>
+    <div className="flex-spacer" />
+    <Link
+      className="BoardShowPage-menuButton"
+      onClick={toggleSideBar}
+    >
+      <Icon className='BoardShowPage-menuButton-icon' type='ellipsis-h' />
+      {sideBarOpen ? 'Hide' : 'Show'} Menu
+    </Link>
+  </div>
+
 
 const clearTextSelection = () => {
   var sel = window.getSelection ?
